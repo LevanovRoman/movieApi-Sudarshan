@@ -1,0 +1,13 @@
+[
+  {
+    "movieId": 1,
+    "title": "Avengers",
+    "director": "Russo",
+    "studio": "Marvel",
+    "movieCast": ["RDJ", "Chris", "Scarlett"],
+    "releaseYear": 2018,
+    "poster": "default.png",
+    "posterUrl": "url"
+  },
+
+]

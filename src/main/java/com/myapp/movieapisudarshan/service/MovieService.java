@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface MovieService {
 
-    MovieDto addMovie(MovieDto movieDto, MultipartFile file);
+    MovieDto addMovie(MovieDto movieDto, MultipartFile file) throws IOException;
 
     MovieDto getMovie(Integer movieId);
 
     List<MovieDto> getAllMovies();
 
-//    MovieDto updateMovie(Integer movieId, MovieDto movieDto, MultipartFile file) throws IOException;
-//
-//    String deleteMovie(Integer movieId) throws IOException;
+    MovieDto updateMovie(Integer movieId, MovieDto movieDto, MultipartFile file) throws IOException;
+
+    String deleteMovie(Integer movieId) throws IOException;
 
 //    MoviePageResponse getAllMoviesWithPagination(Integer pageNumber, Integer pageSize);
 //
