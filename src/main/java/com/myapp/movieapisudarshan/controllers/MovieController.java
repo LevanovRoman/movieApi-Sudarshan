@@ -8,10 +8,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Tag(name = "main_methods")
 @RestController
@@ -28,6 +30,7 @@ public class MovieController {
             summary = "описание метода что делает",
             description = "детальное описание"
     )
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/add-movie")
     public ResponseEntity<MovieDto> addMovieHandler(@RequestPart MultipartFile file,
                                                     @RequestPart String movieDto) throws IOException
@@ -44,6 +47,16 @@ public class MovieController {
     private MovieDto convertToMovieDto(String movieDtoObj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(movieDtoObj, MovieDto.class);
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<MovieDto> getMovieHandler(@PathVariable Integer movieId) {
+        return ResponseEntity.ok(movieService.getMovie(movieId));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MovieDto>> getAllMoviesHandler() {
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 
     @PutMapping("/update/{movieId}")
